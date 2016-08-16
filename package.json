@@ -3,9 +3,16 @@
   "version": "0.0.0",
   "private": true,
   "author": "Jason Nall <jsonnull@gmail.com>",
+  "main": "./dist/render.js",
   "scripts": {
     "test": "ava test",
-    "bundle": "webpack"
+    "examples": "cd examples && webpack",
+    "build": "babel ./src --out-dir ./dist",
+    "prepublish": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jsonnull/react-stackgl.git"
   },
   "eslintConfig": {
     "parser": "babel-eslint",
@@ -15,10 +22,11 @@
     "extends": "standard"
   },
   "dependencies": {
+    "invariant": "^2.2.1"
   },
   "devDependencies": {
-    "jsonnull-project-scripts": "^0.1.1",
     "ava": "^0.16.0",
+    "babel-cli": "^6.11.4",
     "babel-core": "^6.13.2",
     "babel-eslint": "^6.1.2",
     "babel-loader": "^6.2.4",
@@ -28,6 +36,8 @@
     "eslint-plugin-promise": "^2.0.1",
     "eslint-plugin-react": "^6.1.0",
     "eslint-plugin-standard": "^2.0.0",
+    "jsonnull-project-scripts": "^0.1.1",
+    "react": "^15.3.0",
     "webpack": "^1.13.1"
   }
 }
