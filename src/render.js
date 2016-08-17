@@ -10,15 +10,17 @@ import invariant from 'invariant'
  */
 inject()
 
-export const render = function (element, canvas) {
-  // Ensure the first element is valid
-  // TODO: Ensure the canvas is a valid dom element
+export const render = function (element, gl) {
   invariant(
     ReactElement.isValidElement(element),
     'render(): You must pass a valid ReactElement.'
   )
 
-  const rootId = ReactInstanceHandles.createReactRootID(0)
+  invariant(
+    gl instanceof WebGLRenderingContext,
+    'render(): You must pass a WebGLRenderingContext'
+  )
+
   const component = instantiateReactComponent(element) 
 
   ReactUpdates.batchedUpdates(function () {
@@ -26,8 +28,7 @@ export const render = function (element, canvas) {
     transaction.perform(function () {
       component.mountComponent(
         transaction,
-        rootId,
-        // TODO: what is _idCounter used for and when should it be nonzero?
+        gl,
         {_idCounter: 0},
         {}
       );
