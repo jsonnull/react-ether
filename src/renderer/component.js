@@ -1,12 +1,8 @@
+import {Children} from 'react'
 import ReactMultiChild from 'react/lib/ReactMultiChild'
 import invariant from 'invariant'
 
 const StackglComponent = function (element) {
-  invariant(
-    element.type == 'buffer',
-    'React.createComponent(): may only pass native element of type "buffer"'
-  )
-
   this.node = null
   this._mountImage = null
   this._renderedChildren = null
@@ -18,9 +14,8 @@ const StackglComponentMixin = {
 
   mountComponent (transaction, nativeParent, nativeContainerInfo, context) {
     this.node = this._currentElement
-    this.mountChildren(this.node.children, transaction, context)
 
-    // Here nativeParent is the gl instance
+    this.mountChildren(this.node.children, transaction, context)
 
     return this.node
   },
@@ -37,9 +32,9 @@ const StackglComponentMixin = {
 
   unmountComponent () {},
 
-  getNativeNode () {},
-
-  getHostNode () {}
+  getHostNode () {
+    return this.node
+  }
 }
 
 Object.assign(

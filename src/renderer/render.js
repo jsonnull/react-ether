@@ -29,10 +29,12 @@ export const render = function (element, gl) {
       component.mountComponent(
         transaction,
         gl,
-        {_idCounter: 0},
+        {},
         {}
       );
     })
     ReactUpdates.ReactReconcileTransaction.release(transaction)
   })
+
+  return component
 }
