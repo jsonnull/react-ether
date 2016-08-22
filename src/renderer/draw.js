@@ -10,8 +10,15 @@ export function draw (component, ...args) {
       instance.draw(...args)
     }
 
+    // call draw on rendered component
+    draw(component._renderedComponent, ...args)
+
     // call draw on children
-    let children = React.Children.toArray(instance.props.children)
-    children.forEach(child => draw(child, ...args))
+    React.Children.forEach(
+      component._currentElement.props.children,
+      child => {
+        draw(child, ...args)
+      }
+    )
   }
 }
